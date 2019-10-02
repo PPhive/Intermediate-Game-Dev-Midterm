@@ -28,8 +28,8 @@ public class PlayerMovement: MonoBehaviour
 
     void Start()
     {
-        transform.position = new Vector3(0, 0.2f, 0);
-        transform.localEulerAngles = new Vector3(0, 0, 0);
+        transform.position = GameManager.gm.SpawnPos;
+        transform.localEulerAngles = GameManager.gm.SpawnRot;
         myRigidbody.velocity = new Vector3(0, 0, 0);
         myRigidbody.isKinematic = true;
     }
@@ -39,6 +39,17 @@ public class PlayerMovement: MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             Start();
+        }
+
+        //Place Holder Turn
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.position = new Vector3(transform.position.x - 2 * Time.deltaTime, transform.position.y, transform.position.z);
+        }
+
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.position = new Vector3(transform.position.x + 2 * Time.deltaTime, transform.position.y, transform.position.z);
         }
 
         //Petteling
@@ -98,10 +109,19 @@ public class PlayerMovement: MonoBehaviour
         // rotational force = "torque"
         myRigidbody.AddRelativeTorque(inputVector.x, inputVector.y, 0f);
         // thrust
-        myRigidbody.AddRelativeForce(0f, 0f, 1f * 5 * ForceSum());
+        myRigidbody.AddRelativeForce(0f, 0f, 1f * 7 * ForceSum());
     }
 
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        {
+            if (other.gameObject.tag == "Hazard")
+            {
+                Start();
+            }
+        }
+    }
+
 
 
     //True = Pressing Left 
