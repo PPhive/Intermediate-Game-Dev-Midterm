@@ -1,6 +1,6 @@
 //Maya ASCII 2019 scene
 //Name: Houses.ma
-//Last modified: Thu, Oct 10, 2019 02:08:49 AM
+//Last modified: Thu, Oct 10, 2019 09:17:03 PM
 //Codeset: 936
 requires maya "2019";
 requires "mtoa" "3.1.2";
@@ -14,13 +14,13 @@ fileInfo "license" "student";
 createNode transform -s -n "persp";
 	rename -uid "12AB05F1-4B3F-CF9C-3C2B-6EBC4F23763B";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 11.793453395289268 21.273982162926437 -16.352026409542209 ;
+	setAttr ".t" -type "double3" 3.297644076562146 5.9485562805953229 -4.5722962750461686 ;
 	setAttr ".r" -type "double3" -46.538352729607134 144.19999999999888 0 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "B27538A3-4AF4-E0E5-CBA9-80B490D8251A";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999993;
-	setAttr ".coi" 29.309667820596651;
+	setAttr ".coi" 8.1954665215527456;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
