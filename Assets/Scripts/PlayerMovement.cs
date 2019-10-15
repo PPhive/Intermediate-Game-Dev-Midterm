@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerMovement: MonoBehaviour
 {
+    public static PlayerMovement pm;
+
+
     public Rigidbody myRigidbody;
-    Vector3 inputVector;
+    Vector3 myInput;
     private bool oneframewaiter = false;
 
     public GameObject Handle;
@@ -13,9 +16,13 @@ public class PlayerMovement: MonoBehaviour
     //Sense You can only apply a pulse of force on each press and you can press each side 3times.
     //that would be six possible pattles.
     //0,1,2 Left       3,4,5 Right
-    public float[] Force = new float[6];
-    public int PattlesCountL = 3;
+    public float[] Force = new float[20];
+    public int PattlesCountL = 10;
     public int PattlesCountR = 0;
+
+    //Secon as
+    public int PattlesCount;
+
     public float ForceSum()
     {
         float sum = 0;
@@ -26,7 +33,20 @@ public class PlayerMovement: MonoBehaviour
         return sum;
     }
 
-    void Start()
+    private void Awake()
+    {
+        pm = this;
+    }
+
+    public float Velocity()
+    {
+        float speed;
+        speed = Mathf.Sqrt(myRigidbody.velocity.x * myRigidbody.velocity.x + myRigidbody.velocity.z * myRigidbody.velocity.z);
+        //speed = -transform.TransformVector(myRigidbody.velocity).z * 5;
+        return speed * Time.deltaTime * 3;
+    }
+
+void Start()
     {
         transform.position = GameManager.gm.SpawnPos;
         transform.localEulerAngles = GameManager.gm.SpawnRot;
@@ -36,6 +56,7 @@ public class PlayerMovement: MonoBehaviour
 
     void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             Start();
@@ -44,12 +65,12 @@ public class PlayerMovement: MonoBehaviour
         //Place Holder Turn
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.position = new Vector3(transform.position.x - 2 * Time.deltaTime, transform.position.y, transform.position.z);
+            transform.eulerAngles = new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y - 3 * Velocity(), transform.eulerAngles.z);
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.position = new Vector3(transform.position.x + 2 * Time.deltaTime, transform.position.y, transform.position.z);
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + 3 * Velocity(), transform.eulerAngles.z);
         }
 
         //Petteling
@@ -78,7 +99,7 @@ public class PlayerMovement: MonoBehaviour
         {
             if (Force[i] > 0)
             {
-                Force[i] -= 1f * Time.deltaTime;
+                Force[i] -= 1f * 0.7f * Time.deltaTime;
             }
             else
             {
@@ -105,11 +126,9 @@ public class PlayerMovement: MonoBehaviour
         }
 
         // "AddRelative..." applies forces in object's local coordinate space
-
-        // rotational force = "torque"
-        myRigidbody.AddRelativeTorque(inputVector.x, inputVector.y, 0f);
+        //myRigidbody.AddRelativeTorque(inputVector.x, inputVector.y, 0f);
         // thrust
-        myRigidbody.AddRelativeForce(0f, 0f, 1f * 7 * ForceSum());
+        //myRigidbody.AddRelativeForce(0f, 0f, 1f * 7 * ForceSum());
     }
 
     private void OnTriggerEnter(Collider other)
