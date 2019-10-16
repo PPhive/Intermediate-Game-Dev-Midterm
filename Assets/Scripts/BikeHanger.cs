@@ -16,5 +16,7 @@ public class BikeHanger : MonoBehaviour
     {
         transform.position = new Vector3(bike.transform.position.x, bike.transform.position.y + 5f, bike.transform.position.z);
         transform.eulerAngles = bike.transform.eulerAngles;
+
+        
     }
 }

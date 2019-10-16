@@ -775,7 +775,7 @@ SpringJoint:
   m_Spring: 100
   m_Damper: 0.2
   m_MinDistance: 0
-  m_MaxDistance: 0.2
+  m_MaxDistance: 0.4
   m_Tolerance: 0.025
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
@@ -1562,7 +1562,7 @@ GameObject:
   - component: {fileID: 719804253}
   - component: {fileID: 719804252}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Sound Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1578,7 +1578,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 851c9c82765181443933cacb0f4f6e36, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
