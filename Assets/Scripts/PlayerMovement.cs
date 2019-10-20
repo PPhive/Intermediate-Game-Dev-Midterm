@@ -72,12 +72,12 @@ void Start()
         //Place Holder Turn
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.eulerAngles = new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y - 3 * Velocity(), transform.eulerAngles.z);
+            transform.eulerAngles = new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y - 4f * Velocity(), transform.eulerAngles.z);
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + 3 * Velocity(), transform.eulerAngles.z);
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + 4f * Velocity(), transform.eulerAngles.z);
         }
 
         //Petteling
@@ -102,9 +102,9 @@ void Start()
         }
 
         //Periodical Force Decay;
-        if (ForceSum() > 5)
+        if (ForceSum() > 3)
         {
-            ForceDecayRateCapping = (ForceSum() - 5) / 10;
+            ForceDecayRateCapping = (ForceSum() - 3) / 15;
         }
         else
         {
