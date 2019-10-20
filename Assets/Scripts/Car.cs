@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Car : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Rigidbody MyRigidbody;
+
     void Start()
+    {
+
+    }
+
+    void Update()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        MyRigidbody.AddForce(transform.forward * 5);
     }
 }
