@@ -18,6 +18,14 @@ public class Car : MonoBehaviour
 
     void FixedUpdate()
     {
-        MyRigidbody.AddForce(transform.forward * 5);
+        MyRigidbody.AddForce(transform.forward * 8);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "CarDeleters")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
