@@ -11,6 +11,8 @@ public class PlayerMovement: MonoBehaviour
     Vector3 myInput;
     private bool oneframewaiter = false;
 
+    
+
     public GameObject Handle;
 
     //Sense You can only apply a pulse of force on each press and you can press each side 3times.
@@ -19,6 +21,9 @@ public class PlayerMovement: MonoBehaviour
     public float[] Force = new float[20];
     public int PattlesCountL = 10;
     public int PattlesCountR = 0;
+    public float ForceDecayRate;
+    public float ForceDecayRateCapping = 0; //This is for the mechainc where if the stored speed is too fast, the ForceDecay increases.
+    public float BackWheelForceDebug;
 
     //Secon as
     public int PattlesCount;
@@ -56,6 +61,8 @@ void Start()
 
     void Update()
     {
+        BackWheelForceDebug = ForceSum();
+
 
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -80,7 +87,7 @@ void Start()
             PattlesCountL--;
             if (Input.GetKeyDown(KeyCode.Q) && PattlesCountL == 0)
             {
-                PattlesCountR = 3;
+                PattlesCountR = 1;
             }
         }
 
@@ -90,16 +97,25 @@ void Start()
             PattlesCountR--;
             if (Input.GetKeyDown(KeyCode.E) && PattlesCountR == 0)
             {
-                PattlesCountL = 3;
+                PattlesCountL = 1;
             }
         }
 
         //Periodical Force Decay;
+        if (ForceSum() > 5)
+        {
+            ForceDecayRateCapping = (ForceSum() - 5) / 10;
+        }
+        else
+        {
+            ForceDecayRateCapping = 0;
+        }
         for (int i = Force.Length - 1; i >= 0; i--)
         {
+            
             if (Force[i] > 0)
             {
-                Force[i] -= 1f * 0.7f * Time.deltaTime;
+                Force[i] -= (ForceDecayRate + ForceDecayRateCapping) * Time.deltaTime;
             }
             else
             {

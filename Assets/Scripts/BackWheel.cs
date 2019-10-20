@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BackWheel : MonoBehaviour
 {
-    
+    public static BackWheel BW;
 
     JointMotor motor;
     public HingeJoint MyJoint;
@@ -23,7 +23,7 @@ public class BackWheel : MonoBehaviour
     void Update()       
     {
         motor = MyJoint.motor;
-        motor.force = 8 * PlayerMovement.pm.ForceSum();
+        motor.force = 1f * PlayerMovement.pm.ForceSum();
         MyJoint.motor = motor;
     }
 
