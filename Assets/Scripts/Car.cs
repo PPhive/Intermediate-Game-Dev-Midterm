@@ -18,7 +18,7 @@ public class Car : MonoBehaviour
 
     void FixedUpdate()
     {
-        MyRigidbody.AddForce(transform.forward * 8);
+        MyRigidbody.AddForce(transform.forward * GameManager.gm.CarSpeed);
     }
 
     private void OnCollisionEnter(Collision collision)

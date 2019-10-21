@@ -6,14 +6,14 @@ public class PlayerMovement: MonoBehaviour
 {
     public static PlayerMovement pm;
 
-
     public Rigidbody myRigidbody;
     Vector3 myInput;
     private bool oneframewaiter = false;
 
-    
-
+    public GameObject LowerHanger;
     public GameObject Handle;
+    public GameObject BackWheel;
+    public Rigidbody BackWheelRigidBody;
 
     //Sense You can only apply a pulse of force on each press and you can press each side 3times.
     //that would be six possible pattles.
@@ -51,12 +51,19 @@ public class PlayerMovement: MonoBehaviour
         return speed * Time.deltaTime * 3;
     }
 
-void Start()
+    void Start()
     {
         transform.position = GameManager.gm.SpawnPos;
         transform.localEulerAngles = GameManager.gm.SpawnRot;
         myRigidbody.velocity = new Vector3(0, 0, 0);
         myRigidbody.isKinematic = true;
+        BackWheelRigidBody = BackWheel.GetComponent<Rigidbody>();
+        BackWheelRigidBody.isKinematic = true;
+
+        for (int i = Force.Length - 1; i >= 0; i--)
+        {
+            Force[i] = 0;
+        }
     }
 
     void Update()
@@ -72,12 +79,20 @@ void Start()
         //Place Holder Turn
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.eulerAngles = new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y - 4f * Velocity(), transform.eulerAngles.z);
+            //transform.eulerAngles = new Vector3 (transform.eulerAngles.x + 4f * Velocity(), transform.eulerAngles.y - 4f * Velocity(), transform.eulerAngles.z);
+            myRigidbody.AddTorque(transform.forward * 400 * Velocity());
+            myRigidbody.AddTorque(-transform.up * 200 * Velocity());
+            myRigidbody.AddTorque(-transform.right * 50 * Velocity());
+            GameManager.gm.SpringJointforce = 35;
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + 4f * Velocity(), transform.eulerAngles.z);
+            //transform.eulerAngles = new Vector3(transform.eulerAngles.x + 4f * Velocity(), transform.eulerAngles.y + 4f * Velocity(), transform.eulerAngles.z);
+            myRigidbody.AddTorque(-transform.forward * 400 * Velocity());
+            myRigidbody.AddTorque(transform.up * 200 * Velocity());
+            myRigidbody.AddTorque(-transform.right * 50 * Velocity());
+            GameManager.gm.SpringJointforce = 35;
         }
 
         //Petteling
@@ -134,6 +149,7 @@ void Start()
         if (myRigidbody.isKinematic && oneframewaiter)
         {
             myRigidbody.isKinematic = false;
+            BackWheelRigidBody.isKinematic = false;
             oneframewaiter = false;
         }
         if (myRigidbody.isKinematic && !oneframewaiter)

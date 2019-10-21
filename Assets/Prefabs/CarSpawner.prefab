@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Box: {fileID: 3597846889865288940, guid: 91fc8f97bed526f4ab5c0af3c8538970, type: 3}
+  Spawntime: 6
+  StartDelaytime: 0
+  Started: 0

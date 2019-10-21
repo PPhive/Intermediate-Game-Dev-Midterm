@@ -8,6 +8,12 @@ public class GameManager : MonoBehaviour
     public Vector3 SpawnPos;
     public Vector3 SpawnRot;
 
+    public float SpringJointforce;
+    
+    public float CarSpeed;
+
+    public float GameTimer;
+
     void Awake()
     {
         gm = this;
@@ -17,12 +23,12 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        GameTimer = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        GameTimer += Time.deltaTime;
     }
 }
