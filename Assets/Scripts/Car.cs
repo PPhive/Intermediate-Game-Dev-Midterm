@@ -5,6 +5,7 @@ using UnityEngine;
 public class Car : MonoBehaviour
 {
     public Rigidbody MyRigidbody;
+    public GameObject Explosion;
 
     void Start()
     {
@@ -27,5 +28,13 @@ public class Car : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-    }
+
+        if (collision.gameObject.tag == "Hazard")
+        {
+            Instantiate(Explosion, transform.position, transform.rotation, GameManager.gm.transform);
+            Destroy(this.gameObject);
+        }
+
+        
+}
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement: MonoBehaviour
 {
+    public AudioSource myAudio;
+
     public static PlayerMovement pm;
 
     public Rigidbody myRigidbody;
@@ -14,6 +16,8 @@ public class PlayerMovement: MonoBehaviour
     public GameObject Handle;
     public GameObject BackWheel;
     public Rigidbody BackWheelRigidBody;
+
+    public float DebugBoost;
 
     //Sense You can only apply a pulse of force on each press and you can press each side 3times.
     //that would be six possible pattles.
@@ -35,6 +39,12 @@ public class PlayerMovement: MonoBehaviour
         {
             sum += Force[i];
         }
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            sum = 20;
+        }
+
         return sum;
     }
 
@@ -53,6 +63,7 @@ public class PlayerMovement: MonoBehaviour
 
     void Start()
     {
+        myAudio = GetComponent<AudioSource>();
         transform.position = GameManager.gm.SpawnPos;
         transform.localEulerAngles = GameManager.gm.SpawnRot;
         myRigidbody.velocity = new Vector3(0, 0, 0);
@@ -116,6 +127,8 @@ public class PlayerMovement: MonoBehaviour
             }
         }
 
+        
+
         //Periodical Force Decay;
         if (ForceSum() > 3)
         {
@@ -166,8 +179,10 @@ public class PlayerMovement: MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         {
+            
             if (other.gameObject.tag == "Hazard")
             {
+                myAudio.PlayOneShot(myAudio.clip);
                 Start();
             }
         }

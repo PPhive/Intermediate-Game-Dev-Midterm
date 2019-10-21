@@ -350,6 +350,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyRigidbody: {fileID: 4241148422968496402}
+  Explosion: {fileID: 8325561090672607505, guid: 0144c7fa4039c2446b15143caf3d15fa,
+    type: 3}
 --- !u!1 &3673835610097140305
 GameObject:
   m_ObjectHideFlags: 0
