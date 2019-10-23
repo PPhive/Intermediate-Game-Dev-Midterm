@@ -8,7 +8,7 @@ public class SoundDemo : MonoBehaviour
 
     void Start()
     {
-        
+        myAudio = GetComponent<AudioSource>();
     }
 
     void Update()

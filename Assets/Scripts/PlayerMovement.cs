@@ -40,10 +40,12 @@ public class PlayerMovement: MonoBehaviour
             sum += Force[i];
         }
 
+        /*
         if (Input.GetKey(KeyCode.W))
         {
             sum = 20;
         }
+        */
 
         return sum;
     }
