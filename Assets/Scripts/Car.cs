@@ -35,6 +35,6 @@ public class Car : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        
+    
 }
 }
